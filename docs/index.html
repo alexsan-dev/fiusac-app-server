@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Proyecta® - APP | Data API</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700"
+      rel="stylesheet"
+    />
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- we provide is specification here -->
+    <div id="redoc_container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@latest/bundles/redoc.standalone.js"></script>
+    <script>
+      const newPath = window.location.pathname.endsWith('/')
+        ? window.location.pathname
+        : window.location.pathname + '/';
+      let themeJSON = '';
+      if (themeJSON === '') {
+        themeJSON = undefined;
+      }
+      Redoc.init(
+        `${newPath}swagger.json`,
+        {
+          ...(themeJSON && {
+            theme: {
+              ...JSON.parse(themeJSON),
+            },
+          }),
+          ...JSON.parse(
+            '{"sortPropsAlphabetically":true,"hideHostname":false,"untrustedSpec":false,"supressWarnings":true,"requiredPropsFirst":true,"showExtensions":false,"noAutoAuth":true,"pathInMiddlePanel":false,"hideLoading":false,"nativeScrollbars":false,"hideDownloadButton":false,"disableSearch":false,"onlyRequiredInSamples":false,"docName":"swagger"}',
+          ),
+        },
+        document.getElementById('redoc_container'),
+      );
+    </script>
+  </body>
+</html>
